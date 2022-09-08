@@ -29,7 +29,7 @@ config = {
         "S3_USE_SSL": "{{ S3_USE_SSL | default('True') }}",
         "S3_ACCESS_KEY": "{{ OPENEDX_AWS_ACCESS_KEY }}",
         "S3_SECRET_ACCESS_KEY": "{{ OPENEDX_AWS_SECRET_ACCESS_KEY }}",
-        "S3_BUCKET_NAME": "backups",
+        "S3_BUCKET_NAME": "{{ S3_BUCKET_NAME | default('backups') }}",
         "MYSQL_DATABASES": [],
         "MONGODB_DATABASES": [],
         "MONGODB_AUTHENTICATION_DATABASE": "admin",
