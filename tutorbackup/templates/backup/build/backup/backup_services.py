@@ -77,7 +77,7 @@ def get_mongodump_command(database=None):
     port = ENV['MONGODB_PORT']
     outdir = MONGODB_DUMPDIR
 
-    cmd = ("mongodump "
+    cmd = ("mongodump --forceTableScan "
            f"--out={outdir} "
            f"--host={host} "
            f"--port={port}")
