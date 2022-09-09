@@ -54,7 +54,7 @@ spec:
             - name: S3_ADDRESSING_STYLE
               value: '{{ BACKUP_S3_ADDRESSING_STYLE }}'
             - name: S3_REGION_NAME
-              value: '{{ BACKUP_S3_REGION_NAME }}'
+              value: '{{ BACKUP_S3_REGION }}'
             - name: S3_USE_SSL
               value: '{{ BACKUP_S3_USE_SSL }}'
             {% if BACKUP_S3_HOST %}- name: S3_ENDPOINT_URL
@@ -137,7 +137,7 @@ spec:
                 - name: S3_ADDRESSING_STYLE
                   value: '{{ BACKUP_S3_ADDRESSING_STYLE }}'
                 - name: S3_REGION_NAME
-                  value: '{{ BACKUP_S3_REGION_NAME }}'
+                  value: '{{ BACKUP_S3_REGION }}'
                 - name: S3_USE_SSL
                   value: '{{ BACKUP_S3_USE_SSL }}'
                 {% if BACKUP_S3_HOST %}- name: S3_ENDPOINT_URL
@@ -222,7 +222,7 @@ spec:
                 - name: S3_ADDRESSING_STYLE
                   value: '{{ BACKUP_S3_ADDRESSING_STYLE }}'
                 - name: S3_REGION_NAME
-                  value: '{{ BACKUP_S3_REGION_NAME }}'
+                  value: '{{ BACKUP_S3_REGION }}'
                 - name: S3_USE_SSL
                   value: '{{ BACKUP_S3_USE_SSL }}'
                 {% if BACKUP_S3_HOST %}- name: S3_ENDPOINT_URL
