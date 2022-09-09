@@ -57,7 +57,7 @@ def mysqldump():
 
     cmd = ("mysqldump "
            f"{databases_statement} "
-           "--add-drop-database --routines "
+           "--add-drop-database --routines --force"
            "--events --single-transaction "
            "--quick --quote-names --max-allowed-packet=16M "
            f"--host={host} --port={port} "
