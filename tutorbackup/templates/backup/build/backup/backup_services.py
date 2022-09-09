@@ -173,7 +173,7 @@ def upload_to_s3():
         )
 
         received_checksum = obj_metadata['Metadata']['checksum-md5']
-        version_id = obj_metadata['versionId']
+        version_id = None #obj_metadata['versionId']
         size = obj_metadata['ContentLength']
 
         if received_checksum == calculated_checksum:
