@@ -21,6 +21,10 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: backup
+          resources:
+            requests:
+              memory: 4Gi
+              cpu: 1.0
           image: {{ BACKUP_DOCKER_IMAGE }}
           env:
             - name: MYSQL_HOST
