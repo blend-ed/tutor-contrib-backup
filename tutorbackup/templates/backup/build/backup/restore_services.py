@@ -121,46 +121,46 @@ def download_from_s3(file_name, version_id=None):
             ExtraArgs={'VersionId': version_id} if version_id else None,
         )
 
-        logger.info("Checking downloaded file's integrity ...")
-        # boto3.client.head_object will break if empty string or None values
-        # are passed as the VersionId argument. So add that function argument
-        # only if a version ID is given.
-        if version_id:
-            obj_metadata = S3_CLIENT.head_object(
-                Bucket=bucket,
-                Key=os.path.basename(file_name),
-                VersionId=version_id,
-            )
-        else:
-            obj_metadata = S3_CLIENT.head_object(
-                Bucket=bucket,
-                Key=os.path.basename(file_name),
-            )
+        # logger.info("Checking downloaded file's integrity ...")
+        # # boto3.client.head_object will break if empty string or None values
+        # # are passed as the VersionId argument. So add that function argument
+        # # only if a version ID is given.
+        # if version_id:
+        #     obj_metadata = S3_CLIENT.head_object(
+        #         Bucket=bucket,
+        #         Key=os.path.basename(file_name),
+        #         VersionId=version_id,
+        #     )
+        # else:
+        #     obj_metadata = S3_CLIENT.head_object(
+        #         Bucket=bucket,
+        #         Key=os.path.basename(file_name),
+        #     )
 
-        received_version_id = obj_metadata['VersionId']
-        if version_id:
-            version_id_correct = (version_id == received_version_id)
-        else:
-            version_id_correct = True
+        # received_version_id = obj_metadata['VersionId']
+        # if version_id:
+        #     version_id_correct = (version_id == received_version_id)
+        # else:
+        #     version_id_correct = True
 
-        received_checksum = obj_metadata['Metadata']['checksum-md5']
-        calculated_checksum = hashlib.md5(
-            open(file_name, 'rb').read()).hexdigest()
-        checksum_correct = (received_checksum == calculated_checksum)
+        # received_checksum = obj_metadata['Metadata']['checksum-md5']
+        # calculated_checksum = hashlib.md5(
+        #     open(file_name, 'rb').read()).hexdigest()
+        # checksum_correct = (received_checksum == calculated_checksum)
 
-        size = os.path.getsize(file_name)
+        # size = os.path.getsize(file_name)
 
-        if checksum_correct and version_id_correct:
-            logger.info("File integrity verified.\n"
-                        f"Version ID: '{received_version_id}'\n"
-                        f"Size: {size} bytes\n"
-                        f"Checksum: '{received_checksum}'")
-        else:
-            os.remove(file_name)
-            raise IntegrityError(
-                "File integrity could not be verified. "
-                "Deleted the downloaded file with "
-                f"VersionId='{received_version_id}'.")
+        # if checksum_correct and version_id_correct:
+        #     logger.info("File integrity verified.\n"
+        #                 f"Version ID: '{received_version_id}'\n"
+        #                 f"Size: {size} bytes\n"
+        #                 f"Checksum: '{received_checksum}'")
+        # else:
+        #     os.remove(file_name)
+        #     raise IntegrityError(
+        #         "File integrity could not be verified. "
+        #         "Deleted the downloaded file with "
+        #         f"VersionId='{received_version_id}'.")
 
     except (ClientError, IntegrityError) as e:
         logger.exception(e, exc_info=True)
