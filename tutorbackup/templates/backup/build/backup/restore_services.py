@@ -64,7 +64,7 @@ def restore_mongodb():
     logger.info(
         f"Restoring MongoDB databases on {host}:{port} from {dump_dir}")
     cmd = ("mongorestore "
-           "--stopOnError --numParallelCollections=1 " #--drop
+           "--stopOnError --numParallelCollections=1 --drop "
            f"--host={host} --port={port} "
            f"{dump_dir}"
            )
